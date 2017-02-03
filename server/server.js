@@ -1,0 +1,51 @@
+var webpack = require('webpack')
+var webpackDevMiddleware = require('webpack-dev-middleware')
+var webpackHotMiddleware = require('webpack-hot-middleware')
+var config = require('../webpack/dev.config')
+var bodyParser = require('body-parser')
+
+var path = require('path')
+var app = new(require('express'))()
+var port = 3001
+
+var compiler = webpack(config)
+app.use(webpackDevMiddleware(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}))
+app.use(webpackHotMiddleware(compiler))
+
+// POSTによる値の取得の設定
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(bodyParser.json());
+
+var express = require('express');
+app.use(express.static('public'))
+
+// Paramテスト用HTML
+app.get("/test", function (req, res) {
+  res.sendFile(path.resolve(__dirname, '../test.html'))
+})
+
+
+// /test /param 以外のURLは全てここへ
+app.get("*", function (req, res) {
+  res.sendFile(path.resolve(__dirname, '../index.html'))
+})
+
+// post通信
+app.post("/postData", function (req, res) {
+  console.log(req.body)
+  res.setHeader('Content-Type', 'text/plain');
+  res.send(req.body)
+})
+
+app.listen(port, function (error) {
+  if (error) {
+    console.error(error)
+  } else {
+    console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port)
+  }
+})

@@ -1,0 +1,16 @@
+.container {
+  padding: 10px;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+
+.menuImg {
+  margin: 0;
+  position: relative;
+}
+
+.menuImg img {
+  width: 100%;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>JSON TEST</title>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script>
+		$(function () {
+			$("#request").click(function () {
+
+				// アクセス先URL
+				var acssesUrl = ""
+				var appLocationUrl = window.location.protocol + "//" + document.domain + ":" + location.port;
+				if (document.form1.url1.checked) {
+					acssesUrl = appLocationUrl + "/cardList"
+				} else if (document.form1.url2.checked) {
+					acssesUrl = appLocationUrl + "/usageDetails"
+				} else if (document.form1.url3.checked) {
+					acssesUrl = appLocationUrl + "/changePaymentDetails"
+				} else if (document.form1.url4.checked) {
+					acssesUrl = appLocationUrl + "/postData"
+				}
+				console.log(acssesUrl)
+
+				// リクエストパラメータ
+				var requestJson = "";
+				if (document.form2.param0.checked) {
+					requestJson = {
+						'webId': "aaaaaaaa"
+					}
+				} else if (document.form2.param1.checked) {
+					requestJson = {
+						'contract': "xxxxxxxxxx"
+					}
+				} else if (document.form2.param2.checked) {
+					requestJson = {
+						'contract': "yyyyyyyyyy"
+					}
+				} else if (document.form2.param3.checked) {
+					requestJson = {
+						'contract': "zzzzzzzzzz"
+					}
+				}
+				console.log(requestJson)
+
+				// リクエストメゾット
+				var typeMethod = "";
+				if (document.form3.type1.checked) {
+					typeMethod = "GET"
+				} else if (document.form3.type2.checked) {
+					typeMethod = "POST"
+				}
+				console.log(typeMethod)
+
+				$.ajax({
+					type: typeMethod,
+					url: acssesUrl,
+					dataType: "json",
+					data: requestJson,
+					success: function (res) {
+						//alert(data.responseMessage);
+						res = JSON.stringify(res);
+						$("#result").append(res);
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						alert("リクエスト時になんらかのエラーが発生しました：" + textStatus + ":\n" + errorThrown);
+					}
+				});
+
+			});
+			$("#clear").click(function () {
+				location.reload();
+			});
+
+
+
+		});
+	</script>
+</head>
+
+<body>
+	URL<br>
+	<form name="form1">
+		<input type="radio" name="url" id="url1" />http://localhost:3000/cardList<br>
+		<input type="radio" name="url" id="url2" />http://localhost:3000/usageDetails<br>
+		<input type="radio" name="url" id="url3" />http://localhost:3000/changePaymentDetails<br>
+		<input type="radio" name="url" id="url4" />http://localhost:3000/postData<br>
+		<input type="radio" name="url" id="url5" />nothing<br>
+</form>
+	Param<br>
+	<form name="form2">
+		<input type="radio" name="param" id="param0" />{'webId' : "aaaaaaaa"}<br>
+		<input type="radio" name="param" id="param1" />{'contract' : "xxxxxxxxxx"}<br>
+		<input type="radio" name="param" id="param2" />{'contract' : "yyyyyyyyyy"}<br>
+		<input type="radio" name="param" id="param3" />{'contract' : "zzzzzzzzzz"}<br>
+		<input type="radio" name="param" id="param4" />nothing<br>
+	</form>
+	Type<br>
+	<form name="form3">
+		<input type="radio" name="type" id="type1" checked/>GET<br>
+		<input type="radio" name="type" id="type2" />POST<br><<<<<<< HEAD
+		<form>
+			<input type="button" id="request" value="GET_JSON"><br>
+			<input id="clear" type="button" value="clear">
+			<div id="result">
+				<p>結果：</p>
+			</div>
+</body>
+
+</html>

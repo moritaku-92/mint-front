@@ -1,0 +1,13 @@
+[{
+        "label": "TOP画面",
+        "path": "top"
+    },
+    {
+        "label": "入金",
+        "path": "payment"
+    },
+    {
+        "label": "残高照会",
+        "path": "balance"
+    }
+]
