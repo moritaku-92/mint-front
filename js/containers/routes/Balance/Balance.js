@@ -20,8 +20,8 @@ class Detail extends Component {
 }
 
 function mapStateToProps(state) {
-  const {bottomNavigation, billing, cardInfo} = state
-  return {bottomNavigation, billing, cardInfo}
+  const {bottomNavigation} = state
+  return {bottomNavigation}
 }
 
 function mapDispatchToProps(dispatch) {

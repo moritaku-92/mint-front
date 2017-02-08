@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     console.log('## App');
     const { navigationDrawer, actions } = this.props
-    console.log(this.props)
+    
     return (
       <div>
         <AppBar

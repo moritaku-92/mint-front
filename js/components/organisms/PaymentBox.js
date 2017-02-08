@@ -7,11 +7,14 @@ import {
     CardTitle,
     CardText
 } from 'material-ui/Card'
-import account from '../../../res_file/accountList.json'
+import {connect} from 'react-redux'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
+import {Field, reduxForm} from 'redux-form/immutable'
+
+import FormField from '../molecules/FormField'
 
 const styles = {
     customWidth: {
@@ -22,65 +25,27 @@ const styles = {
 class PaymentBox extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            from: account[0],
-            to: account[1],
-        };
     }
 
     render() {
 
-        // DropDownMenuを変更
-        const fromHandleChange = (event, index, value) => {
-            this.setState({from:value})
-        }
-        const toHandleChange = (event, index, value) => {
-            this.setState({to:value})
-        }
-
-
-        var fromAccountList = []
-        account.forEach((element, index) => {
-            fromAccountList.push(<MenuItem key={index} value={element} primaryText={element}/>)
-        })
-        var toAccountList = []
-        account.forEach((element, index) => {
-            toAccountList.push(<MenuItem key={index} value={element} primaryText={element}/>)
-        })
+        const {handleSubmit} = this.props
 
         return (
             <Card>
                 <CardText>
-                    <CardHeader title="入金"/>
-                    <CardText>
-                        FROM<br/>
-                        <DropDownMenu
-                            value={this.state.from}
-                            onChange={(event, index, value) => fromHandleChange(event, index, value)}
-                            autoWidth={false}
-                            style={styles.customWidth}
-                        >
-                            {fromAccountList}
-                        </DropDownMenu><br/>
-                        TO<br/>
-                        <DropDownMenu
-                            value={this.state.to}
-                            onChange={(event, index, value) => toHandleChange(event, index, value)}
-                            autoWidth={false}
-                            style={styles.customWidth}
-                        >
-                            {toAccountList}
-                        </DropDownMenu><br/>
-                        <TextField
-                             floatingLabelText="AMOUNT"
-                             floatingLabelFocusStyle={{color: "#2ca9e1"}}
-                             underlineFocusStyle={{borderColor: "#2ca9e1"}}
-                        />
-                        <RaisedButton label="入金"/>
-                    </CardText>
+                    <form onSubmit={handleSubmit}>
+                        <Field name="from" component={FormField} label="FROM" type="text"/>
+                        <Field name="to" component={FormField} label="TO" type="text"/>
+                        <Field name="amount" component={FormField} label="AMOUNT" type="text"/>
+                        <RaisedButton type="submit" label="入金" className="raised-button-submit"/>
+                    </form>
                 </CardText>
             </Card>
         )
     }
 }
-export default PaymentBox
+
+export default reduxForm({
+    form: 'Payment' // a unique identifier for this form
+})(PaymentBox)
