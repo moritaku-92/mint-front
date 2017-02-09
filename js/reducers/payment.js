@@ -9,7 +9,15 @@ const initialState = {}
 
 export const payment = handleActions({
 
+  [PAYMENT_POST_REQUEST]: (state, action) => {
+    return Object.assign({}, state)
+  },
+
   [PAYMENT_POST_SUCCESS]: (state, action) => {
+    return Object.assign({}, state)
+  },
+
+  [PAYMENT_POST_FAILURE]: (state, action) => {
     return Object.assign({}, state)
   }
 

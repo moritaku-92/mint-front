@@ -11,10 +11,15 @@ class Payment extends Component {
     const {actions} = this.props
   }
 
+  onSubmitEvent(values){
+    // alert('submit成功:' + JSON.stringify(values))
+    this.props.actions.transfer(values)  //サーバにポストするアクション
+  }
+
   render() {
     return (
       <PaymentBox
-        onSubmit={(state)=>this.transfer(state)}
+        onSubmit={(values) => this.onSubmitEvent(values)}
       />
     )
   }
