@@ -34,8 +34,6 @@ class BalanceBox extends Component {
             this.setState({value})
         }
 
-        console.log("aaa", this.state)
-
         var accountList = []
         account.forEach((element, index) => {
             accountList.push(<MenuItem key={index} value={element} primaryText={element}/>)
@@ -54,8 +52,14 @@ class BalanceBox extends Component {
                         >
                             {accountList}
                         </DropDownMenu><br/>
-                        <RaisedButton label="残高取得"/>
+                        <RaisedButton
+                            label="残高取得"
+                            onClick={()=>this.props.submit(this.state.value)}
+                        />
                     </CardText>
+                </CardText>
+                <CardText>
+                    残高　：　{this.props.balance}
                 </CardText>
             </Card>
         )

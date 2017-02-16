@@ -33,6 +33,9 @@ class PaymentBox extends Component {
 
         return (
             <Card>
+                <CardHeader
+                    title="入金"
+                />
                 <CardText>
                     <form onSubmit={handleSubmit}>
                         <Field name="from" component={FormField} label="FROM" type="text"/>

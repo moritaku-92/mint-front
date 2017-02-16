@@ -4,12 +4,14 @@ import { reducer as formReducer } from 'redux-form/immutable'
 import { navigationDrawer } from './navigationDrawer'
 import { bottomNavigation } from './bottomNavigation'
 import { payment } from './payment'
+import { balance } from './balance'
 const rootReducer = combineReducers({
   form: formReducer,
   routing: routerReducer,
   navigationDrawer,
   bottomNavigation,
-  payment
+  payment,
+  balance
 })
 
 export default rootReducer
