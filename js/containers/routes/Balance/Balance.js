@@ -12,7 +12,6 @@ class Detail extends Component {
     const {actions} = this.props
   }
   onSubmitEvent(value){
-    console.log("vvvvvvvv",value)
     this.props.actions.getBilling(value)  //サーバにポストするアクション
   }
 
