@@ -3,3 +3,4 @@ assets
 debug.log
 npm-debug.log.*
 .vscode
+npm-debug.log

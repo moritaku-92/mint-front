@@ -8,6 +8,14 @@ var path = require('path')
 var app = new(require('express'))()
 var port = 3001
 
+// クロスドメイン許可設定
+var allowCrossDomain = function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+}
+app.use(allowCrossDomain);
+
 var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,

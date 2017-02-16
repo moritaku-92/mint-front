@@ -14,7 +14,7 @@ export const payment = handleActions({
   },
 
   [PAYMENT_POST_SUCCESS]: (state, action) => {
-    return Object.assign({}, state)
+    return Object.assign({}, state, action.payload)
   },
 
   [PAYMENT_POST_FAILURE]: (state, action) => {

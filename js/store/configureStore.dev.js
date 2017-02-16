@@ -10,8 +10,8 @@ export default function configureStore(initialState, history) {
     rootReducer,
     initialState,
     applyMiddleware(routerMiddleware(hashHistory), 
-    createLogger(),
-    api)
+    api,
+    createLogger())
   )
 
   if (module.hot) {
