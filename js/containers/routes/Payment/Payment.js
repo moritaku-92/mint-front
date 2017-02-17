@@ -17,6 +17,7 @@ class Payment extends Component {
   }
 
   render() {
+    console.log("aaaa",this.props.payment.result.status)
     return (
       <PaymentBox
         onSubmit={(values) => this.onSubmitEvent(values)}

@@ -5,7 +5,7 @@ import {
   PAYMENT_POST_FAILURE
 } from '../constants/ActionTypes'
 
-const initialState = {}
+const initialState = {result:{status:""}}
 
 export const payment = handleActions({
 
